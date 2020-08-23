@@ -23,12 +23,13 @@ void TrafficObject::getPosition(double &x, double &y)
 TrafficObject::TrafficObject()
 {
     _type = ObjectType::noObject;
-    _id = _idCnt++;
+    _id = _idCnt++; // give each TrafficObject an UID
 }
 
 TrafficObject::~TrafficObject()
 {
     // set up thread barrier before this object is destroyed
+    // task l1.1
     std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
         t.join();
     });

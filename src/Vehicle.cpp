@@ -25,6 +25,7 @@ void Vehicle::setCurrentDestination(std::shared_ptr<Intersection> destination)
 void Vehicle::simulate()
 {
     // launch drive function in a thread
+    // task l1.2
     threads.emplace_back(std::thread(&Vehicle::drive, this));
 }
 
@@ -33,7 +34,7 @@ void Vehicle::drive()
 {
     // print id of the current thread
     std::unique_lock<std::mutex> lck(_mtx);
-    std::cout << "Vehicle #" << _id << "::drive: thread id = " << std::this_thread::get_id() << std::endl;
+    std::cout << "Vehicle #" << _id << "::drive: thread id = " << std::this_thread::get_id() << std::endl; //protect std::cout
     lck.unlock();
 
     // initalize variables
@@ -50,6 +51,8 @@ void Vehicle::drive()
 
         // compute time difference to stop watch
         long timeSinceLastUpdate = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - lastUpdate).count();
+        
+        // run cycle every 1ms to update vehicle info
         if (timeSinceLastUpdate >= cycleDuration)
         {
             // update position with a constant velocity motion model

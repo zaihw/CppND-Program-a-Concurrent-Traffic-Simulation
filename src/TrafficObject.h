@@ -27,7 +27,7 @@ public:
     ObjectType getType() { return _type; }
 
     // typical behaviour methods
-    virtual void simulate(){};
+    virtual void simulate(){}; //can be overwrite in derived classes
 
 protected:
     ObjectType _type;                 // identifies the class type
@@ -37,7 +37,7 @@ protected:
     static std::mutex _mtx;           // mutex shared by all traffic objects for protecting cout 
 
 private:
-    static int _idCnt; // global variable for counting object ids
+    static int _idCnt; // global variable for counting object ids, Shared by all instances of TrafficObject or derived objects
 };
 
 #endif

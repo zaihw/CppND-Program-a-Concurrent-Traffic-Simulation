@@ -18,14 +18,14 @@ public:
     void setCurrentDestination(std::shared_ptr<Intersection> destination);
 
     // typical behaviour methods
-    void simulate();
+    void simulate(); //overwrite virtual function simulate() in base class TrafficObject
 
     // miscellaneous
-    std::shared_ptr<Vehicle> get_shared_this() { return shared_from_this(); }
+    std::shared_ptr<Vehicle> get_shared_this() { return shared_from_this(); } // ?????????
 
 private:
     // typical behaviour methods
-    void drive();
+    void drive();   // manages driving behavior
 
     std::shared_ptr<Street> _currStreet;            // street on which the vehicle is currently on
     std::shared_ptr<Intersection> _currDestination; // destination to which the vehicle is currently driving
